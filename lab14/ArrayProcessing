@@ -1,0 +1,25 @@
+#include <iostream>
+
+template <typename T>
+T average(T arr[], int size) {
+    T sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum += arr[i];
+    }
+    return sum / size;
+}
+
+int main() {
+    int arrInt[] = {1, 2, 3, 4, 5};
+    long arrLong[] = {1000000, 2000000, 3000000, 4000000, 5000000};
+    double arrDouble[] = {1.1, 2.2, 3.3, 4.4, 5.5};
+    char arrChar[] = {'a', 'b', 'c', 'd', 'e'};
+
+    std::cout << "Average of arrInt: " << average(arrInt, 5) << std::endl;
+    std::cout << "Average of arrLong: " << average(arrLong, 5) << std::endl;
+    std::cout << "Average of arrDouble: " << average(arrDouble, 5) << std::endl;
+    // For char type, we can't find the average
+    // std::cout << "Average of arrChar: " << average(arrChar, 5) << std::endl;
+
+    return 0;
+}
