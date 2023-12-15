@@ -1,0 +1,36 @@
+#include <iostream>
+#include <cmath>
+#include <tuple>
+using namespace std;
+
+tuple<int, double, double> Myroot(double a, double b, double c)
+{
+    double x1, x2;
+    int result = 0;
+    double d = b * b - 4 * a * c;
+    if (d < 0)
+        result = -1;
+    else
+    {
+        x1 = (-b + sqrt(d)) / (2 * a);
+        x2 = (-b - sqrt(d)) / (2 * a);
+        result = 1;
+    }
+
+    return make_tuple(result, x1, x2);
+}
+
+int main()
+{
+    double a, b, c;
+    cin >> a >> b >> c;
+
+    tuple<int, double, double> answer = Myroot(a, b, c);
+
+    if (get<0>(answer) == 1)
+        cout << "x1 = " << get<1>(answer) << " and x2 = " << get<2>(answer);
+    else
+        cout << "no roots";
+
+    return 0;
+}
