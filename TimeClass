@@ -1,0 +1,45 @@
+#include <iostream>
+using namespace std;
+
+class Time {
+private:
+    int hours;
+    int minutes;
+    int seconds;
+
+public:
+    Time() : hours(0), minutes(0), seconds(0) { }
+    Time(int h, int m, int s) : hours(h), minutes(m), seconds(s) {
+        normalizeTime();
+    }
+
+    void displayTime() const {
+        cout << hours << ":" << minutes << ":" << seconds << endl;
+    }
+
+    void addTime(const Time& t1, const Time& t2) {
+        hours = t1.hours + t2.hours;
+        minutes = t1.minutes + t2.minutes;
+        seconds = t1.seconds + t2.seconds;
+        normalizeTime();
+    }
+
+private:
+    void normalizeTime() {
+        minutes += seconds / 60;
+        seconds %= 60;
+        hours += minutes / 60;
+        minutes %= 60;
+    }
+};
+
+int main() {
+    const Time time1(12, 30, 45);
+    const Time time2(8, 20, 15);
+    Time time3;
+
+    time3.addTime(time1, time2);
+    time3.displayTime();
+
+    return 0;
+}
