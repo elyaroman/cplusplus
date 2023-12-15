@@ -1,0 +1,50 @@
+#include <iostream>
+
+class Time {
+private:
+    int hours, minutes, seconds;
+
+public:
+    class TimeException : public std::exception {
+    public:
+        TimeException(const std::string& message) : std::exception(message.c_str()) {}
+    };
+
+    Time() : hours(0), minutes(0), seconds(0) {}
+
+    Time(int h, int m, int s) {
+        if (h < 0 || m < 0 || m >= 60 || s < 0 || s >= 60) {
+            throw TimeException("Invalid time parameters");
+        }
+        hours = h + m / 60;
+        minutes = m % 60;
+        minutes += s / 60;
+        hours += minutes / 60;
+        minutes %= 60;
+        seconds = s % 60;
+    }
+
+    void displayTime() const {
+        std::cout << hours << ":" << minutes << ":" << seconds << std::endl;
+    }
+
+    Time addTime(const Time& t) const {
+        Time sum;
+        sum.seconds = seconds + t.seconds;
+        sum.minutes = minutes + t.minutes + sum.seconds / 60;
+        sum.hours = hours + t.hours + sum.minutes / 60;
+        sum.minutes %= 60;
+        sum.seconds %= 60;
+        return sum;
+    }
+};
+
+int main() {
+    try {
+        Time time1(8, 70, 30); // Инициализированный объект с неправильным параметром
+    }
+    catch (const Time::TimeException& e) {
+        std::cout << "Ошибка: " << e.what() << std::endl;
+    }
+    return 0;
+}
