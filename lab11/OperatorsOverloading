@@ -1,0 +1,70 @@
+#include <iostream>
+
+class Time {
+private:
+    int hours;
+    int minutes;
+public:
+    Time(int h = 0, int m = 0) : hours(h), minutes(m) {}
+
+    Time operator+(const Time& t) const {
+        int totalMinutes = hours * 60 + minutes + t.hours * 60 + t.minutes;
+        return Time(totalMinutes / 60, totalMinutes % 60);
+    }
+
+    Time operator-(const Time& t) const {
+        int totalMinutes1 = hours * 60 + minutes;
+        int totalMinutes2 = t.hours * 60 + t.minutes;
+        int diff = totalMinutes1 - totalMinutes2;
+        if (diff < 0) {
+            diff = 0;  // or do something else, depending on the requirements
+        }
+        return Time(diff / 60, diff % 60);
+    }
+
+    Time operator+(double d) const {
+        int totalMinutes = hours * 60 + minutes + static_cast<int>(d * 60);
+        return Time(totalMinutes / 60, totalMinutes % 60);
+    }
+
+    friend Time operator+(double d, const Time& t) {
+        return t + d;
+    }
+
+    bool operator==(const Time& t) const {
+        return (hours == t.hours && minutes == t.minutes);
+    }
+
+    bool operator!=(const Time& t) const {
+        return !(*this == t);
+    }
+
+    void display() const {
+        std::cout << hours << " hours, " << minutes << " minutes" << std::endl;
+    }
+};
+
+int main() {
+    Time t1(2, 30);
+    Time t2(1, 45);
+
+    Time t3 = t1 + t2;
+    t3.display();
+
+    Time t4 = t1 - t2;
+    t4.display();
+
+    Time t5 = t1 + 1.5;
+    t5.display();
+
+    Time t6 = 1.5 + t2;
+    t6.display();
+
+    if (t1 == t2) {
+        std::cout << "t1 and t2 are equal" << std::endl;
+    } else {
+        std::cout << "t1 and t2 are not equal" << std::endl;
+    }
+
+    return 0;
+}
