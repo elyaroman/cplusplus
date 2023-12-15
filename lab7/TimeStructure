@@ -1,1 +1,59 @@
-# Задание 1. Структура Time
+#include <iostream>
+using namespace std;
+
+struct Time
+{
+    int sec;
+    int min;
+    int hours;
+};
+
+void getSeconds(Time n)
+{
+    int fseconds = n.hours * 3600 + n.min * 60 + n.sec;
+    cout << fseconds << "seconds" << endl;
+}
+
+void addTime(Time first, Time second)
+{
+    Time third;
+    third.hours = first.hours + second.hours;
+    third.min = first.min + second.min;
+    third.sec = first.sec + second.sec;
+    cout << "time addition is ";
+    getSeconds(third);
+}
+
+void subtractTime(Time first, Time second)
+{
+    Time fourth;
+    fourth.hours = first.hours - second.hours;
+    fourth.min = first.min - second.min;
+    fourth.sec = first.sec - second.sec;
+    cout << "time subtraction is ";
+    getSeconds(fourth);
+}
+
+
+int main()
+{
+    Time first, second;
+    cout << "enter first hours" << endl;
+    cin >> first.hours;
+    cout << "enter first minutes" << endl;
+    cin >> first.min;
+    cout << "enter first seconds" << endl;
+    cin >> first.sec;
+
+    cout << "enter second hours" << endl;
+    cin >> second.hours;
+    cout << "enter second minutes" << endl;
+    cin >> second.min;
+    cout << "enter second seconds" << endl;
+    cin >> second.sec;
+
+    getSeconds(first);
+    getSeconds(second);
+    addTime(first, second);
+    subtractTime(first, second);
+}
