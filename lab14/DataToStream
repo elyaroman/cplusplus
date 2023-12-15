@@ -1,0 +1,22 @@
+#include <iostream>
+#include <vector>
+#include <list>
+#include <string>
+
+template <typename T>
+void Print(const T& container, const std::string& delimiter) {
+    for (const auto& element : container) {
+        std::cout << element << delimiter;
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5};
+    std::list<std::string> lst = {"apple", "banana", "cherry", "date"};
+
+    Print(vec, " ");
+    Print(lst, ", ");
+
+    return 0;
+}
