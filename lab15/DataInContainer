@@ -1,0 +1,44 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+struct StudentGrade
+{
+  string name;
+  char grade;
+};
+
+char& GradeMap::operator[](const string &name)
+{
+  for (auto &ref : m_map)
+    {
+      if (ref.name == name)
+        return ref.grade;
+}
+
+  StudentGrade temp{ name, ' ' };
+  m_map.push_back(temp);
+  return m_map.back().grade;
+}
+
+int main()
+{
+  GradeMap grades;
+  grades["elya"] = 'A';
+  grades["roman"] = 'B';
+
+  cout << "elya has a grade of " << grades["elya"] << endl;
+  cout << "roman has a grade of " << grades["roman"] << endl;
+
+  cout << "new name and grade?" << endl;
+  string name;
+  char grade;
+  cin >> name >> grade;
+  grades[name] = grade;
+
+  std::cout << name << " has a grade of " << grades[name] << endl;
+
+  return 0;
+}
